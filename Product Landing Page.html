@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Glasses - Landing Page</title>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+  <style>
+    :root {
+      --bg-dark: #0f172a;
+      --text-dark: #f8fafc;
+      --accent: #4fb0ff;
+
+      --bg-light: #ffffff;
+      --text-light: #0f172a;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      transition: all 0.3s ease;
+    }
+
+    body.light {
+      background: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    /* Navbar */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(15, 23, 42, 0.9);
+      backdrop-filter: blur(10px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+    }
+    header.light {
+      background: rgba(255,255,255,0.9);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    nav a {
+      margin: 0 12px;
+      text-decoration: none;
+      color: inherit;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover {
+      color: var(--accent);
+    }
+
+    /* Toggle Button */
+    .toggle-btn {
+      cursor: pointer;
+      background: var(--accent);
+      border: none;
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #fff;
+      transition: background 0.3s;
+    }
+    .toggle-btn:hover {
+      background: #1d9dff;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 10%;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0; left: 0;
+      z-index: 0;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 50%;
+      text-align: left;
+    }
+    .hero h2 {
+      font-size: 40px;
+      margin-bottom: 20px;
+    }
+    .hero p {
+      font-size: 18px;
+      margin-bottom: 20px;
+    }
+    .hero button {
+      padding: 12px 25px;
+      font-size: 16px;
+      background: var(--accent);
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      color: #fff;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .hero button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 15px rgba(79,176,255,0.5);
+    }
+    .hero img {
+      width: 420px;
+      z-index: 1;
+      position: relative;
+      filter: drop-shadow(0px 0px 25px rgba(79,176,255,0.8));
+      transform: perspective(1000px) rotateY(-10deg);
+      transition: transform 0.5s ease;
+    }
+    .hero img:hover {
+      transform: perspective(1000px) rotateY(10deg) scale(1.05);
+    }
+
+    /* Features */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 80px 10%;
+    }
+    .card {
+      background: rgba(255,255,255,0.05);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    body.light .card {
+      background: #f9fafb;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 25px rgba(79,176,255,0.4);
+    }
+    .card h3 {
+      margin-top: 0;
+      color: var(--accent);
+    }
+    /* Types Section */
+.types {
+  padding: 80px 20px;
+  background: var(--bg);
+  color: var(--text);
+  text-align: center;
+}
+
+.types .section-title {
+  font-size: 2rem;
+  margin-bottom: 40px;
+  color: var(--accent);
+}
+
+.types-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.type-card {
+  background: var(--card);
+  border-radius: 15px;
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.type-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.type-card h3 {
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.type-card:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.6);
+}
+
+
+    /* Pricing */
+    .pricing {
+      padding: 80px 10%;
+      text-align: center;
+    }
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+    }
+    .plan {
+      background: rgba(255,255,255,0.05);
+      padding: 25px;
+      border-radius: 15px;
+      width: 280px;
+      transition: 0.3s;
+    }
+    .plan:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(79,176,255,0.4);
+    }
+    body.light .plan {
+      background: #f9fafb;
+    }
+    .plan h3 {
+      margin: 0;
+      color: var(--accent);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 80px 10%;
+      background: rgba(255,255,255,0.02);
+      text-align: center;
+    }
+    .review {
+      max-width: 600px;
+      margin: 20px auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    }
+    body.light .review {
+      background: #f3f4f6;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 30px;
+      background: rgba(0,0,0,0.6);
+      color: #aaa;
+    }
+    body.light footer {
+      background: #f3f4f6;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <header>
+    <h1>AI Glasses</h1>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#testimonials">Testimonials</a>
+    </nav>
+    <button class="toggle-btn" onclick="toggleMode()"> Dark Mode</button>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div id="particles-js"></div>
+    <div class="hero-content">
+      <h2>Next-Gen AI Glasses</h2>
+      <p>Experience the future of smart eyewear with cutting-edge AI features.</p>
+      <button>Buy Now</button>
+    </div>
+    <img src="https://i.pinimg.com/736x/c8/fe/ad/c8feadd195440085be3e11664185944c.jpg" alt="AI Glasses">
+  </section>
+
+  <!-- Features -->
+  <section id="features" class="features">
+    <div class="card"><h3>📸 Smart Camera</h3><p>Capture photos & videos hands-free.</p></div>
+    <div class="card"><h3>🎙️ Voice Assistant</h3><p>Ask anything, control devices instantly.</p></div>
+    <div class="card"><h3>🕶️ Adaptive Lenses</h3><p>Auto-adjust tint for all environments.</p></div>
+    <div class="card"><h3>🔔 Instant Alerts</h3><p>Get discreet notifications in real-time.</p></div>
+    <div class="card"><h3>🔋 Long Battery</h3><p>All-day usage with fast charging.</p></div>
+    <div class="card"><h3>🤝 Gesture Control</h3><p>Navigate menus with hand gestures.</p></div>
+  </section>
+  <!-- ====== Types Section ====== -->
+<section id="types" class="types">
+  <h2 class="section-title"> Choose Your Style</h2>
+  <div class="types-grid">
+    <div class="type-card">
+      <img src="https://i.pinimg.com/1200x/52/81/90/528190b67e2e3239fc7b623fc9f8af0e.jpg" alt="Classic AI Glasses">
+      <h3>Classic</h3>
+      <p>Elegant design for everyday wear with smart features.</p>
+    </div>
+    <div class="type-card">
+      <img src="https://i.pinimg.com/736x/ac/1d/18/ac1d18f17fb7b518c10e9ab039a21fc2.jpg" alt="Sport AI Glasses">
+      <h3>Sport</h3>
+      <p>Lightweight, durable and sweat-resistant for active users.</p>
+    </div>
+    <div class="type-card">
+      <img src="https://i.pinimg.com/736x/bb/c6/d3/bbc6d362ad43831b164493ec786c0312.jpg" alt="Business AI Glasses">
+      <h3>Business</h3>
+      <p>Premium look with productivity-focused tools.</p>
+    </div>
+    <div class="type-card">
+      <img src="https://i.pinimg.com/736x/f6/84/a8/f684a87a2bc6d1999932112162eb9308.jpg" alt="Travel AI Glasses">
+      <h3>Travel</h3>
+      <p>Translate languages & navigate seamlessly on the go.</p>
+    </div>
+    <div class="type-card">
+      <img src="https://i.pinimg.com/1200x/2e/21/c9/2e21c9952e9cbea5e8755a688d425cf1.jpg" alt="Gaming AI Glasses">
+      <h3>Gaming</h3>
+      <p>Immersive AR gaming with ultra-fast response time.</p>
+    </div>
+    <div class="type-card">
+      <img src="https://i.pinimg.com/736x/c4/b0/7b/c4b07b3a940d85f71c396084aac4e466.jpg" alt="Fashion AI Glasses">
+      <h3>Fashion</h3>
+      <p>Bold designs to match your style with smart assistance.</p>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Pricing -->
+  <section id="pricing" class="pricing">
+    <h2>Choose Your Plan</h2>
+    <div class="plans">
+      <div class="plan"><h3>Basic</h3><p>$199</p><p>Essential AI features</p></div>
+      <div class="plan"><h3>Pro</h3><p>$299</p><p>Advanced AI + Alerts</p></div>
+      <div class="plan"><h3>Ultimate</h3><p>$399</p><p>All features + Premium Support</p></div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <div class="review"><p>“The AI Glasses changed how I work and travel. Totally worth it!”</p><strong>- Sarah J.</strong></div>
+    <div class="review"><p>“Notifications + voice assistant on my glasses? Game changer.”</p><strong>- Mike R.</strong></div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 AI Glasses Inc. | Follow us: Twitter | Instagram</p>
+  </footer>
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle('light');
+      const btn = document.querySelector('.toggle-btn');
+      if (document.body.classList.contains('light')) {
+        btn.textContent = "🌞 Light Mode";
+      } else {
+        btn.textContent = "🌙 Dark Mode";
+      }
+    }
+
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 60 },
+        "size": { "value": 3 },
+        "move": { "speed": 1 },
+        "line_linked": { "enable": true, "distance": 150, "color": "#4fb0ff" },
+        "color": { "value": "#4fb0ff" }
+      }
+    });
+  </script>
+</body>
+</html>
